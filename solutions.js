@@ -89,10 +89,8 @@ const isUnique = function (s) {
 const isPalindrome = function (s) {
   if(typeof s !== "string") return "Argument is not a string";
   if(s.length <= 1) return true;
-  for(var i = 0; i < s.length; i++) {
-    if(s[i] !== s[s.length -1]) return false;
-    else return isPalindrome(s.slice(1,s.length-1));
-  }
+  if(s[i] !== s[s.length -1]) return false;
+  else return isPalindrome(s.slice(1,s.length-1));
 }
 
 
