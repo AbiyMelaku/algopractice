@@ -83,8 +83,7 @@ const hasPalindromePermutation = function (str) {
 };
 
 /*
-  Given an array with sub-arrays, all of which hold numbers, return the sum
-  of all the numbers in the array  
+  Given an array with sub-arrays, all of which hold numbers, return the sum of all the numbers in the array  
 */
 
 const arraySum = function (arr) {
@@ -92,18 +91,9 @@ const arraySum = function (arr) {
 };
 
 /*
+  Return an array with all permutations of a string with unique characters
 */
 
 const allPermutations = function (s) {
-  // body...
-  var results = [];
-  var recurser = function (combo, rest) {
-    if(rest.length === 0) {results.push(combo); return;}
-    for(var i = 0; i < rest.length; i++) {
-      recurser(combo + rest[i], rest.slice(0,i).concat(rest.slice(i+1)))
-    }
-  }
-  recurser("", s);
-  console.log(results);
-  return results;
+  // your code goes here
 }

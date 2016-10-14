@@ -8,7 +8,6 @@ const reverseString = function (str) {
 
 // Reverse only the vowels in the provided string.
 const reverseVowels = function (str) {
-  //to be completed
   //---------helper functions
   var swap = function(i, j, array) {
     var temp = array[i];
@@ -258,6 +257,10 @@ const arraySum = function (arr) {
     return total;
   }
   */
+
+/*
+Return an array with all permutations of a string with unique characters
+*/
 
 const allPermutations = function (s) {
   // body...
