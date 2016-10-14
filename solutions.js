@@ -54,15 +54,33 @@ Given an array of integers, return indices of the two numbers such that they add
 Because arr[0] + arr[1] = 2 + 7 = 9, return [0, 1].
 */
 const twoSum = function (arr, tgt) {
-  var results,num,diff = [];
-  for (var i = 0, n = arr.length; i < n; i++) {
-  //var index = arr.indexOf(tgt - arr[i]);
-  //index > -1 && (results = [index, i])
-    num = arr[i];
-    var diffNum = diff[num];
-    (diffNum || diffNum === 0) ? (results = [diffNum, i]) : (diff[tgt - num] = i)
+  /*
+    var results,num,diff = [];
+    for (var i = 0, n = arr.length; i < n; i++) {
+    //var index = arr.indexOf(tgt - arr[i]);
+    //index > -1 && (results = [index, i])
+      num = arr[i];
+      var diffNum = diff[num];
+      (diffNum || diffNum === 0) ? (results = [diffNum, i]) : (diff[tgt - num] = i)
+    }
+    return results;
+  */
+  /*
+    Using a hash table
+  */
+
+  var dict = {};
+  var result = [];
+  for(var i = 0; i < arr.length; i++) {
+    var diff = tgt - arr[i];
+    if(dict.hasOwnProperty(diff)) {
+      result.push(dict[diff]);
+      result.push(i);
+      return result;
+    } 
+    else { dict[arr[i]] = i; }
   }
-  return results;
+
 };
 
 /*
