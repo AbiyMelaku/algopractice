@@ -1,29 +1,26 @@
-const Node = (val) => ({value: val, edges: []})
+const Node = (val) => ({value: val, edges: {}})
 
 const Graph = function() {
 	this.storage = {}
 }
 
-Graph.prototype.addNode = function(val) { this.storage[val] = Node(val); }
+Graph.prototype.addNode = function(val) { if(!this.storage[val]) this.storage[val] = Node(val); }
 
-Graph.prototype.removeNode = function (val) { delete this.storage[val]; }
+Graph.prototype.removeNode = function (val) { if(this.storage[val]) delete this.storage[val]; }
 
 Graph.prototype.addEdge = function(fromNode, toNode) {
 	if(!this.storage[fromNode]) this.addNode(fromNode);
 	if(!this.storage[toNode]) this.addNode(toNode);
-	this.storage[fromNode].edges.push(toNode);
-	this.storage[toNode].edges.push(fromNode);
+	this.storage[fromNode].edges[toNode] = true;
+	this.storage[toNode].edges[fromNode] = true;
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-	var indexOfTo = this.storage[fromNode].edges.indexOf(toNode);
-	var indexOfFrom = this.storage[toNode].edges.indexOf(fromNode);
-
-	this.storage[fromNode].edges.splice(indexOfTo, 1);
-	this.storage[toNode].edges.splice(indexOfFrom, 1);
+	delete this.storage[fromNode].edges[toNode]
+	delete this.storage[toNode].edges[fromNode];
 };
 
-Graph.prototype.hasEdge = function(fromNode, toNode) { return this.storage[fromNode].edges.indexOf(toNode) > -1 ? true : false; }
+Graph.prototype.hasEdge = function(fromNode, toNode) { return Boolean(this.storage[fromNode].edges[toNode]) }
 
 Graph.prototype.contains = function(nodeVal) { return Boolean(this.storage[nodeVal]); }
 
