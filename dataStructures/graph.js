@@ -11,8 +11,8 @@ Graph.prototype.removeNode = function (val) { if(this.storage[val]) delete this.
 Graph.prototype.addEdge = function(fromNode, toNode) {
 	if(!this.storage[fromNode]) this.addNode(fromNode);
 	if(!this.storage[toNode]) this.addNode(toNode);
-	this.storage[fromNode].edges[toNode] = true;
-	this.storage[toNode].edges[fromNode] = true;
+	this.storage[fromNode].edges[toNode] = this.storage[toNode];
+	this.storage[toNode].edges[fromNode] = this.storage[fromNode];
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode) {
@@ -30,5 +30,24 @@ Graph.prototype.forEachNode = function(cb) {
 	}
 };
 
+
+const graphBfs = (node, cb) => {
+	let myQ = [];
+	node.visited = true;
+	myQ.push(node);
+
+	while(myQ.length) {
+		let node = myQ.shift();
+		
+		cb(node);
+
+		for(var edge in node.edges) {
+			if(!edge.visited) {
+				edge.visited = true;
+				myQ.push(edge);
+			}
+		} //for
+	}//while
+}
 
 
