@@ -59,4 +59,54 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+
+
+  it('should return a boolen if a path exists in the graph', function() {
+
+    /*
+      
+      a -> b
+      b -> c 
+      c -> a
+  
+      a -> d 
+      d -> e
+
+     */
+    var myDirectedGraph = new DirectedGraph();
+    var connectToFive = function(item) {
+      myDirectedGraph.addEdge(item, 5);
+    };
+    myDirectedGraph.addNode('a');
+    myDirectedGraph.addNode('b');
+    myDirectedGraph.addNode('c');
+    myDirectedGraph.addNode('d');
+    myDirectedGraph.addNode('e');
+    myDirectedGraph.addEdge('a', 'b');
+    myDirectedGraph.addEdge('b', 'c');
+    myDirectedGraph.addEdge('c', 'a');
+    myDirectedGraph.addEdge('a', 'd');
+    myDirectedGraph.addEdge('d', 'e');
+
+
+    console.log(myDirectedGraph);
+    expect(areConnected(myDirectedGraph.storage['a'], myDirectedGraph.storage['b'])).to.equal(true);
+    expect(areConnected(myDirectedGraph.storage['a'], myDirectedGraph.storage['c'])).to.equal(false);
+    expect(areConnected(myDirectedGraph.storage['a'], myDirectedGraph.storage['e'])).to.equal(true);
+
+    expect(myDirectedGraph.hasEdge('a', 'b')).to.equal(true);
+    expect(myDirectedGraph.hasEdge('b', 'c')).to.equal(true);
+    expect(myDirectedGraph.hasEdge('c', 'a')).to.equal(true);
+    expect(myDirectedGraph.hasEdge('a', 'd')).to.equal(true);
+    expect(myDirectedGraph.hasEdge('d', 'e')).to.equal(true);
+
+    expect(myDirectedGraph.hasEdge('d', 'a')).to.equal(false);
+    expect(myDirectedGraph.hasEdge('b', 'a')).to.equal(false);
+    expect(myDirectedGraph.hasEdge('a', 'c')).to.equal(false);
+    expect(myDirectedGraph.hasEdge('e', 'd')).to.equal(false);
+    expect(myDirectedGraph.hasEdge('b', 'e')).to.equal(false);
+    expect(myDirectedGraph.hasEdge('b', 'd')).to.equal(false);
+
+
+  });
 });
