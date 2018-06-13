@@ -70,3 +70,50 @@ const inOrderSuccessor = (root, tgt) => {
   recurser(root, tgt, returnSuccessor);
   return successor;
 }
+
+
+/*
+	MY WRONG RECURSIVE SOLUTION 
+	const inOrderSuccessor = (root, tgt) => {
+	  let lastNodeWasTgt = false;
+	  let successor = null
+
+	  const recurser = (root, tgt) => {
+	    if (root.left) recurser(root.left, tgt);
+	    if (lastNodeWasTgt) successor = root;
+	    if (root.value === tgt) lastNodeWasTgt = true;
+	    if (root.right) recurser(root.right, tgt);
+	  }
+
+	  recurser(root, tgt);
+	  return successor;
+	}
+ */
+
+
+/*
+	CORRECT RECURSIVE SOLUTION 
+const inOrderSuccessor2 = (root, tgt) => {
+  let lastNodeWasTgt = false;
+
+  const recurser = (root, tgt) => {
+    if (root.left) {
+      const ret = recurser(root.left, tgt);
+
+      if (ret) return ret;
+    }
+
+    if (lastNodeWasTgt) return root;
+    if (root.value === tgt) lastNodeWasTgt = true;
+
+    if (root.right) {
+      const ret = recurser(root.right, tgt);
+
+      if (ret) return ret;
+    }
+  }
+
+  return recurser(root, tgt);
+
+}
+*/
