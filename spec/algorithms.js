@@ -12,6 +12,10 @@ describe('reverseString', function () {
     expect(reverseString("hello")).to.equal("olleh");
     expect(reverseString("Greetings from Earth")).to.equal("htraE morf sgniteerG");
   });
+  
+  it('should return an empty string is the input is empty', () => {
+    expect(reverseString('')).to.equal('');
+  });
 
   // Add more assertions here
 });
